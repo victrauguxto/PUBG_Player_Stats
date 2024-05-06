@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload de Planilha</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .upload-container {
+            width: 50%;
+            margin: 0 auto;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+        }
+        .upload-container label {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .upload-container input[type=file] {
+            display: none;
+        }
+        .upload-container .btn-upload {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .upload-container .btn-upload:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload de Planilha</h1>
+    <div class="upload-container">
+        <label for="file">Selecione a planilha a ser enviada:</label>
+        <input type="file" id="file" name="file">
+        <button class="btn-upload" onclick="uploadFile()">Enviar</button>
+    </div>
+
+    <script>
+        function uploadFile() {
+            var fileInput = document.getElementById('file');
+            var file = fileInput.files[0];
+            if (file) {
+                // Aqui você pode enviar o arquivo para o servidor usando AJAX ou outra técnica
+                console.log('Arquivo selecionado:', file.name);
+                alert('Arquivo enviado com sucesso!');
+            } else {
+                alert('Selecione um arquivo antes de enviar.');
+            }
+        }
+    </script>
+</body>
+</html>
