@@ -2,20 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Upload</title>
+    <link rel="stylesheet" href="static/css/home.css">
 </head>
-<a href="/" class="btn">Home</a>
-<link rel="stylesheet" href="static/css/home.css">
 <body>
-<form action="upload" enctype="multipart/form-data" method="post">
-    <p>
-        Upload feito com sucesso!
-    </p>
-
-
-
-
-</form>
-
+    <a href="/" class="btn">Home</a>
+    <h1>Upload feito com sucesso!</h1>
+    <p>Arquivos na pasta "upload":</p>
+    <ul>
+        {% for file in files %}
+        <li>{{ file }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

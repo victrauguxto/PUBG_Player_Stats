@@ -7,6 +7,10 @@
     </style>
     <link rel="stylesheet" href="static/css/home.css">
       <a href="/articles" class="btn">Articles</a>
+    <a href="/upload" class="btn">Upload</a>
+
+    <h2>Welcome, {{ username }}</h2>
+
 </head>
 <body>
     <h1>Welcome to PUBG Analysis Portal</h1>
@@ -21,15 +25,6 @@
         <li>Upload PUBG statistics spreadsheets</li>
         <li>Automatically generate graphs for analysis</li>
     </ul>
-
-    <!-- Formulário de login -->
-    <form action="/login" method="post">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br><br>
-        <input type="submit" value="Login">
-    </form>
 
     <h2>Testimonials</h2>
     <p>Here are some testimonials from our users:</p>
