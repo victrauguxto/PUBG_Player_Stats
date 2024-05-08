@@ -5,12 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Read Google Sheets</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <h1>Read Google Sheets</h1>
+
+
+    <!-- Formulário principal -->
     <form action="/read_sheets" method="post">
         <label for="sheet_link">Google Sheets Link:</label><br>
         <input type="text" id="sheet_link" name="sheet_link" required><br><br>
+        <label for="sheet_link">Página a ser analisada</label><br>
+        <input type="text" id="pagina" name="pagina" required><br><br>
         <input type="submit" value="Submit">
     </form>
 </body>

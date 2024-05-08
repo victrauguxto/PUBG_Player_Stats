@@ -1,8 +1,20 @@
-.btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+body {
+    background-color: #333; /* Cor de fundo escura */
+    color: #fff; /* Cor do texto clara */
+    font-family: 'Roboto', sans-serif; /* Fonte semelhante à usada no jogo */
 }
+
+h1, h2 {
+    color: #f0ad4e; /* Cor amarela semelhante à usada no jogo */
+}
+
+.btn {
+    background-color: #f0ad4e; /* Cor amarela para o botão */
+    color: #333; /* Cor do texto escura para contrastar */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    text-decoration: none; /* Remover sublinhado do link */
+    display: inline-block; /* Exibir como bloco em linha */
+    border-radius: 5px; /* Borda arredondada */
+}
+
+/* Outros estilos específicos do PUBG */

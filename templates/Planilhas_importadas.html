@@ -1,0 +1,13 @@
+<!-- Lista de planilhas importadas -->
+<div id="planilhas_importadas">
+    <label for="planilhas">Planilhas Importadas:</label><br>
+    <ul>
+        {% for planilha in planilhas_importadas %}
+        <li>
+            <form action="/exibir_planilha/{{ loop.index0 }}" method="get">
+                <button type="submit">{{ planilha.titulo }} - {{ planilha.pagina }}</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</div><br>
