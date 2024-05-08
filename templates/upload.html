@@ -2,24 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read Google Sheets</title>
 </head>
-<a href="/" class="btn">Home</a>
-<link rel="stylesheet" href="static/css/home.css">
 <body>
-<form action="upload" enctype="multipart/form-data" method="post">
-    <p>
-        <input type="file" name="planilha_dados" id="planilha_dados"
-    </p>
-
-    <p>
-        <button type="submit">Enviar</button>
-    </p>
-
-
-
-
-</form>
-
+    <h1>Read Google Sheets</h1>
+    <form action="/read_sheets" method="post">
+        <label for="sheet_link">Google Sheets Link:</label><br>
+        <input type="text" id="sheet_link" name="sheet_link" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>

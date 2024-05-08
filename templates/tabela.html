@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Planilha</title>
+</head>
+<body>
+    <h1>Tabela da Planilha</h1>
+    <table border="1">
+        <tr>
+            {% for coluna in dados[0].keys() %}
+                <th>{{ coluna }}</th>
+            {% endfor %}
+        </tr>
+        {% for linha in dados %}
+            <tr>
+                {% for valor in linha.values() %}
+                    <td>{{ valor }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
