@@ -1,115 +1,30 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <title>PUBG Analysis</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f8f8;
-        }
-        h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #333;
-        }
-        h2 {
-            font-size: 24px;
-            margin-top: 30px;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        p {
-            font-size: 18px;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            color: #555;
-        }
-        ul {
-            margin-bottom: 20px;
-            padding-left: 20px;
-            color: #555;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        thead {
-            background-color: #f2f2f2;
-        }
-        tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        a.btn {
-            display: block;
-            text-align: center;
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            text-decoration: none;
-            margin-bottom: 20px;
-        }
-        a.btn:hover {
-            background-color: #555;
-        }
-    </style>
+    <title>PUBG Analysis - Artigos</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="static/css/main.css" />
+    <noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
 </head>
-<body>
-    <a href="/" class="btn">Home</a>
-    <h1>Diferenças entre os servidores</h1>
-    <p>Comparação entre os estilos de jogo nos servidores de PUBG</p>
+<body class="is-preload">
 
-    <h2>Metodologia:</h2>
-    <p>Para este estudo, foram analisados um total de 21 campeonatos de PUBG, sendo selecionados 3 campeonatos de cada servidor...</p>
+    <!-- Wrapper -->
+    <div id="wrapper" class="fade-in">
 
-    <h2>Objetivo:</h2>
-    <p>O objetivo deste relatório é analisar e comparar as principais diferenças de estilo de jogo dos principais servidores do mundo em campeonatos de PUBG...</p>
+        <!-- Header, Nav, and Footer -->
+        <!-- Adicione conforme necessário -->
 
-    <h2>Conceitos Importantes:</h2>
-    <ul>
-        <li>PPG = Points per game / Pontos por Partida</li>
-        <li>KPG = Kills per game / Kills por Partida</li>
-        <li>CPG =
-Position points per game / Pontos de Colocação por partida</li>
-</ul>
+        <!-- Main -->
+        <div id="main">
+            <!-- Exibe o conteúdo do artigo -->
+            {{ article_content | safe }}
+        </div>
 
-php
-Copy code
-<h2>Dados de Servidores e Campeonatos:</h2>
-<table>
-    <thead>
-        <tr>
-            <th>CAMP</th>
-            <th>Servidores</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Nome do Campeonato</td>
-            <td>Servidor A, Servidor B, Servidor C</td>
-        </tr>
-        <!-- Repetir para cada campeonato -->
-    </tbody>
-</table>
+    </div>
 
-<h2>Diferença média em PPG entre o primeiro e o último (por CAMP) - Servidor Selecionado:</h2>
-<!-- Inserir gráfico de linhas aqui -->
+    <!-- Scripts -->
+    <!-- Adicione conforme necessário -->
 
-<h2>Campeões de cada Campeonato:</h2>
-<!-- Inserir gráfico de barras aqui -->
-
-<!-- Adicione mais elementos HTML conforme necessário para representar os dados e gráficos restantes -->
 </body>
 </html>

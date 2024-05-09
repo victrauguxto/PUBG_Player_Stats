@@ -1,8 +1,9 @@
-import os
+
 from flask import Flask, request, render_template, redirect, url_for
 import pandas as pd
 import gspread
 import plotly.express as px
+import plotly.graph_objects as go
 
 gc = gspread.service_account(filename='upload/credentials.json')
 
@@ -17,7 +18,9 @@ def homepage():
 
 @app.route("/articles")
 def articles():
+
     return render_template('artigos.html')
+
 
 @app.route("/read_sheets", methods=['GET', 'POST'])
 def read_sheets():
@@ -39,13 +42,41 @@ def read_sheets():
             df['Effectiveness'] = df['Damage Dealt'] / df['Kills']
             df_top5 = df.sort_values(by='Kills', ascending=False).head(5)
             bargraph = px.bar(df_top5, x='Player', y='Kills', title='Top 5 Jogadores com Mais Kills')
+            # Selecionar apenas as colunas relevantes para os dois jogadores com mais kills
+            df_top2_stats = df[['Player', 'Kills', 'Knocks', 'Assists', 'Damage Dealt', 'Revives']].head(2).copy()
 
+            # Converter as colunas para números
+            for col in ['Kills', 'Knocks', 'Assists', 'Damage Dealt', 'Revives']:
+                df_top2_stats[col] = pd.to_numeric(df_top2_stats[col], errors='coerce')
 
+            # Categorias para as estatísticas
+            categories = ['Kills', 'Knocks', 'Assists', 'Damage Dealt', 'Revives']
 
-            # Convert DataFrame para formato de tabela HTML
-            html_table = df.to_html(index=False, header=True)
+            # Criar o gráfico de radar
+            fig = go.Figure()
 
-            return render_template('data.html', fig=bargraph.to_html())
+            # Adicionar traços para cada jogador
+            for index, row in df_top2_stats.iterrows():
+                fig.add_trace(go.Scatterpolar(
+                    r=row.values[1:].tolist(),
+                    theta=categories,
+                    fill='toself',
+                    name=row['Player']  # Usar o nome do jogador como nome na legenda
+                ))
+
+            # Configurações do layout
+            fig.update_layout(
+                polar=dict(
+                    radialaxis=dict(
+                        visible=True,
+                        range=[0, df_top2_stats.iloc[:, 1:].max().max()]
+                        # Usar iloc para excluir a coluna 'Player' ao calcular o máximo
+                    )
+                ),
+                showlegend=True
+            )
+
+            return render_template('data.html', bargraph=bargraph.to_html(), fig=fig.to_html())
         except gspread.exceptions.APIError:
             return "Erro ao acessar a planilha. Verifique se o link está correto e se a planilha é compartilhada corretamente."
 

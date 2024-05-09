@@ -23,9 +23,26 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+        .graph-container {
+            display: flex;
+            justify-content: space-around;
+        }
+        .graph {
+            width: 45%;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-    {{ fig|safe }}
+    <div class="graph-container">
+        <div class="graph">
+            <h3>Top 5 Jogadores com Mais Kills</h3>
+            {{ bargraph|safe }}
+        </div>
+        <div class="graph">
+            <h3>Stats dos 2 Jogadores com Mais Kills</h3>
+            {{ fig|safe }}
+        </div>
+    </div>
 </body>
 </html>
