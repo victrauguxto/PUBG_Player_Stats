@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>PUBG Analysis</title>
+    <title>PUBG Analysis - Login</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="static/css/main.css" />
@@ -22,8 +22,8 @@
         <!-- Nav -->
 					<nav id="nav">
 						<ul class="links">
-							<li class="active"><a href="/">Home</a></li>
-							<li><a href="/login">Login</a></li>
+							<li><a href="/">Home</a></li>
+							<li class="active"><a href="/login">Login</a></li>
 							<li><a href="/articles">Articles</a></li>
 						</ul>
 						<ul class="icons">
@@ -33,38 +33,29 @@
     						<li><a href="https://github.com/victrauguxto" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
 						</ul>
 					</nav>
+
         <!-- Main -->
         <div id="main">
 
-            <!-- Featured Post -->
-            <article class="post featured">
-                <header class="major">
-                    <span class="date">April 25, 2017</span>
-                    <h2><a href="#">Top PUBG Players</a></h2>
-                    <p>Discover the top PUBG players and their gameplay stats.</p>
-                </header>
-                <a href="#" class="image main"><img src="templates/images/pic01.jpg" alt="" /></a>
-                <ul class="actions special">
-                    <li><a href="#" class="button large">Read More</a></li>
-                </ul>
-            </article>
-
-            <!-- Posts -->
-            <section class="posts">
-                <article>
-                    <header>
-                        <span class="date">April 24, 2017</span>
-                        <h2><a href="#">Analyzing PUBG Gameplay</a></h2>
-                    </header>
-                    <a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
-                    <p>Learn how to analyze PUBG gameplay to improve your skills.</p>
+            <!-- Login Form -->
+            <section id="login-form">
+                <h2>Login</h2>
+                <form method="post" action="/login">
+                    <div class="fields">
+                        <div class="field">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username" required />
+                        </div>
+                        <div class="field">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" required />
+                        </div>
+                    </div>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Read More</a></li>
+                        <li><input type="submit" value="Login" class="button" /></li>
                     </ul>
-                </article>
-                <!-- More articles here -->
+                </form>
             </section>
-
 
         </div>
 

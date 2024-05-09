@@ -38,14 +38,14 @@ def read_sheets():
 
             df['Effectiveness'] = df['Damage Dealt'] / df['Kills']
             df_top5 = df.sort_values(by='Kills', ascending=False).head(5)
-            fig = px.bar(df_top5, x='Player', y='Kills', title='Top 5 Jogadores com Mais Kills')
+            bargraph = px.bar(df_top5, x='Player', y='Kills', title='Top 5 Jogadores com Mais Kills')
 
 
 
             # Convert DataFrame para formato de tabela HTML
             html_table = df.to_html(index=False, header=True)
 
-            return render_template('data.html', fig=fig.to_html())
+            return render_template('data.html', fig=bargraph.to_html())
         except gspread.exceptions.APIError:
             return "Erro ao acessar a planilha. Verifique se o link está correto e se a planilha é compartilhada corretamente."
 
@@ -55,8 +55,12 @@ def read_sheets():
 def home_logado():
     return render_template("homepage_logado.html")
 
-@app.route('/login', methods=['POST'])
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'GET':
+        return render_template('login.html')
+
     nome = request.form.get('username')
     senha = request.form.get('password')
 
