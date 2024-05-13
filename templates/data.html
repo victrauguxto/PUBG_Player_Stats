@@ -1,48 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Player Stats</title>
+    <title>Gráficos de Barras e Tabela</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        table {
+       /* Estilo para a tabela */
+        .custom-table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
-        th, td {
-            border: 1px solid #ddd;
+
+        /* Estilo para as células de cabeçalho */
+        .custom-table th {
+            background-color: {{ cor }}; /* Cor personalizada */
+            color: #000000; /* Texto preto */
+            font-weight: bold;
             padding: 8px;
             text-align: left;
+            border: 1px solid #ddd;
         }
-        th {
-            background-color: #f2f2f2;
+
+        /* Estilo para as células de dados */
+        .custom-table td {
+            background-color: #ffffff; /* Branco */
+            color: #000000; /* Texto preto */
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+
+        /* Estilo para os gráficos de barras */
+        .plotly-graph-div .plotly .bars rect {
+            fill: {{ cor }} !important; /* Cor personalizada */
         }
+        /* Estilo para os gráficos */
         .graph-container {
             display: flex;
-            justify-content: space-around;
-        }
-        .graph {
-            width: 45%;
+            flex-wrap: wrap; /* Permite que os gráficos quebrem para a próxima linha */
             margin-bottom: 20px;
         }
+
+        .graph {
+            flex: 0 0 calc(33.333% - 20px); /* Tamanho dos gráficos de barras, considerando a margem entre eles */
+            margin-right: 20px; /* Espaço entre os gráficos */
+            border: 1px solid #ddd; /* Adiciona borda */
+            padding: 10px; /* Adiciona espaço interno */
+            box-sizing: border-box; /* Considera a borda no cálculo do tamanho */
+        }
+
+
     </style>
 </head>
+
 <body>
     <div class="graph-container">
-        <div class="graph">
-            <h3>Top 5 Jogadores com Mais Kills</h3>
-            {{ bargraph|safe }}
+        <!-- Exibe o gráfico de barras 1 -->
+        <div class="graph graph-bar">
+            {{ bargraph | safe }}
         </div>
-        <div class="graph">
-            <h3>Stats dos 2 Jogadores com Mais Kills</h3>
-            {{ fig|safe }}
+        <!-- Exibe o gráfico de barras 2 -->
+        <div class="graph graph-bar">
+            {{ bargraph_DMG | safe }}
+        </div>
+        <!-- Exibe o gráfico de barras 3 -->
+        <div class="graph graph-bar">
+            {{ bargraph_Knocks | safe }}
         </div>
     </div>
+    <!-- Exibe a tabela de dados -->
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>TWR</th>
+                <th>Kills</th>
+                <th>Knocks</th>
+                <th>Assists</th>
+                <th>Damage Dealt</th>
+                <th>Revives</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in df_top5_stats_table.iterrows() %}
+            <tr>
+                <td>{{ row['Player'] }}</td>
+                <td>{{ row['TWR'] }}</td>
+                <td>{{ row['Kills'] }}</td>
+                <td>{{ row['Knocks'] }}</td>
+                <td>{{ row['Assists'] }}</td>
+                <td>{{ row['Damage Dealt'] }}</td>
+                <td>{{ row['Revives'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

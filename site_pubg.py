@@ -3,7 +3,8 @@ from flask import Flask, request, render_template, redirect, url_for
 import pandas as pd
 import gspread
 import plotly.express as px
-import plotly.graph_objects as go
+import re
+
 
 gc = gspread.service_account(filename='upload/credentials.json')
 
@@ -40,43 +41,35 @@ def read_sheets():
             df['Kills'] = df['Kills'].apply(lambda x: 0 if x == '' else float(x))
 
             df['Effectiveness'] = df['Damage Dealt'] / df['Kills']
-            df_top5 = df.sort_values(by='Kills', ascending=False).head(5)
-            bargraph = px.bar(df_top5, x='Player', y='Kills', title='Top 5 Jogadores com Mais Kills')
+            df_top5 = df.sort_values(by='TWR', ascending=False).head(5)
+            df_top5_stats_table = df_top5[['Player','TWR', 'Kills', 'Knocks', 'Assists', 'Damage Dealt', 'Revives']].copy()
+            df_top5_stats_table['Damage Dealt'] = df_top5_stats_table['Damage Dealt'] * 1000
             # Selecionar apenas as colunas relevantes para os dois jogadores com mais kills
-            df_top2_stats = df[['Player', 'Kills', 'Knocks', 'Assists', 'Damage Dealt', 'Revives']].head(2).copy()
+            df_top5_stats = df_top5[['Player', 'Kills', 'Knocks', 'Assists', 'Damage Dealt', 'Revives']].copy()
+            df_top5_stats['Damage Dealt'] = df_top5_stats['Damage Dealt'] * 5
+            df_top5_stats['Damage Dealt (normalized)'] = df_top5_stats['Damage Dealt'] / 5
 
-            # Converter as colunas para números
+            # Converter as colunas para strings, substituir vírgulas por pontos e converter para float
             for col in ['Kills', 'Knocks', 'Assists', 'Damage Dealt', 'Revives']:
-                df_top2_stats[col] = pd.to_numeric(df_top2_stats[col], errors='coerce')
+                df_top5_stats[col] = df_top5_stats[col].astype(str).str.replace(',', '.').astype(float)
 
             # Categorias para as estatísticas
             categories = ['Kills', 'Knocks', 'Assists', 'Damage Dealt', 'Revives']
+            # Receber a cor personalizada do formulário
+            cor = request.form.get('cor')
+            # Verificar se a cor está vazia ou não é uma cor hexadecimal válida
+            if not cor or not re.match("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", cor):
+                # Cor padrão
+                cor = "#ffffff"  # Branco
 
-            # Criar o gráfico de radar
-            fig = go.Figure()
+            # gerar gráficos de barras com cor personalizada
+            # Gerar gráficos de barras com cor personalizada
+            bargraph = px.bar(df_top5, x='Player', y='Kills', title='Top 5 Kills', color_discrete_sequence=[cor])
+            bargraph_DMG = px.bar(df_top5, x='Player', y='Damage Dealt', title='Top 5 DMG', color_discrete_sequence=[cor])
+            bargraph_Knocks = px.bar(df_top5, x='Player', y='Knocks', title='Top 5 Knocks', color_discrete_sequence=[cor])
+            bargraph_Knocks.update_yaxes(type='linear')
 
-            # Adicionar traços para cada jogador
-            for index, row in df_top2_stats.iterrows():
-                fig.add_trace(go.Scatterpolar(
-                    r=row.values[1:].tolist(),
-                    theta=categories,
-                    fill='toself',
-                    name=row['Player']  # Usar o nome do jogador como nome na legenda
-                ))
-
-            # Configurações do layout
-            fig.update_layout(
-                polar=dict(
-                    radialaxis=dict(
-                        visible=True,
-                        range=[0, df_top2_stats.iloc[:, 1:].max().max()]
-                        # Usar iloc para excluir a coluna 'Player' ao calcular o máximo
-                    )
-                ),
-                showlegend=True
-            )
-
-            return render_template('data.html', bargraph=bargraph.to_html(), fig=fig.to_html())
+            return render_template('data.html', bargraph=bargraph.to_html(),bargraph_Knocks=bargraph_Knocks.to_html(),bargraph_DMG=bargraph_DMG.to_html(), df_top5_stats_table=df_top5_stats_table, cor=cor)
         except gspread.exceptions.APIError:
             return "Erro ao acessar a planilha. Verifique se o link está correto e se a planilha é compartilhada corretamente."
 
@@ -100,7 +93,12 @@ def login():
     else:
         return "Usuário Não Encontrado"
 
-
+@app.route("/How_it_works")
+def How_it_works():
+    return render_template('How_it_works.html')
+@app.route("/privacypolicy")
+def privacypolicy():
+    return render_template('privacypolicy.html')
 
 
 if __name__ == "__main__":
