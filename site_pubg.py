@@ -41,7 +41,7 @@ def read_sheets():
             df['Kills'] = df['Kills'].apply(lambda x: 0 if x == '' else float(x))
 
             df['Effectiveness'] = df['Damage Dealt'] / df['Kills']
-            df_top5 = df.sort_values(by='TWR', ascending=False).head(5)
+            df_top5 = df.head(5)
             df_top5_stats_table = df_top5[['Player','TWR', 'Kills', 'Knocks', 'Assists', 'Damage Dealt', 'Revives']].copy()
             df_top5_stats_table['Damage Dealt'] = df_top5_stats_table['Damage Dealt'] * 1000
             # Selecionar apenas as colunas relevantes para os dois jogadores com mais kills
