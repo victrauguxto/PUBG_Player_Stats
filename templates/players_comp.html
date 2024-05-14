@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+
+        /* Estilo para os gráficos de barras */
+        .plotly-graph-div .plotly .bars rect {
+            fill: {{ cor }} !important; /* Cor personalizada */
+        }
+        /* Estilo para os gráficos */
+        .graph-container {
+            display: flex;
+            flex-wrap: wrap; /* Permite que os gráficos quebrem para a próxima linha */
+            margin-bottom: 20px;
+        }
+
+        .graph {
+            flex: 0 0 calc(33.333% - 20px); /* Tamanho dos gráficos de barras, considerando a margem entre eles */
+            margin-right: 20px; /* Espaço entre os gráficos */
+            border: 1px solid #ddd; /* Adiciona borda */
+            padding: 10px; /* Adiciona espaço interno */
+            box-sizing: border-box; /* Considera a borda no cálculo do tamanho */
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <h1>Players Comparison</h1>
+    <form action="/compare_players" method="post">
+        <div>
+            <h2>Select Players:</h2>
+            {% for player in players %}
+            <input type="checkbox" name="player_checkbox" value="{{ player }}" {% if player in selected_players %} checked {% endif %}>
+            <label>{{ player }}</label><br>
+            {% endfor %}
+        </div>
+        <div>
+            <button type="submit" name="update">Update</button>
+        </div>
+        <div id="graph">
+            {{ fig | safe }}
+        </div>
+    </form>
+</body>
+</html>

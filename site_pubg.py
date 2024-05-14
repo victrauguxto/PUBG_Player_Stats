@@ -1,14 +1,16 @@
 
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash
 import pandas as pd
 import gspread
 import plotly.express as px
 import re
-
+import plotly.graph_objs as go
+from oauth2client.service_account import ServiceAccountCredentials
 
 gc = gspread.service_account(filename='upload/credentials.json')
 
 app = Flask(__name__)
+app.secret_key = 'N9mH6Sb-3f4F8H7_gjN2SQKty_r1i5wJ'
 
 # Lista de planilhas já importadas
 planilhas_importadas = []
@@ -88,10 +90,19 @@ def login():
     nome = request.form.get('username')
     senha = request.form.get('password')
 
-    if nome == "admin" and senha == "123456":
+    # Leitura da planilha do Google Sheets
+    sheet = gc.open_by_url('https://docs.google.com/spreadsheets/d/1LUy0ZpJcIxYoB8vbyeqSH-oDMmlC93tCJieBhVQzMHQ/edit#gid=0').worksheet('Users')
+    dados = sheet.get_all_records()
+
+    # Convertendo para DataFrame
+    df_users = pd.DataFrame(dados)
+
+    # Verificar se o nome e senha estão na planilha
+    if not df_users[(df_users['username'] == nome) & (df_users['password'] == senha)].empty:
         return render_template('homepage_logado.html', username=nome)
     else:
-        return "Usuário Não Encontrado"
+        flash('User not Found')
+        return redirect(url_for('login'))
 
 @app.route("/How_it_works")
 def How_it_works():
@@ -99,7 +110,6 @@ def How_it_works():
 @app.route("/privacypolicy")
 def privacypolicy():
     return render_template('privacypolicy.html')
-
 
 if __name__ == "__main__":
     app.run(debug=True)

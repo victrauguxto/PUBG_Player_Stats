@@ -20,19 +20,20 @@
         </header>
 
         <!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li><a href="/">Home</a></li>
-							<li class="active"><a href="/login">Login</a></li>
-							<li><a href="/articles">Articles</a></li>
-						</ul>
-						<ul class="icons">
-							<li><a href="https://twitter.com/victrauguxto" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
-    						<li><a href="https://www.linkedin.com/in/victoraugustomartins/" class="icon brands fa-linkedin" target="_blank"><span class="label">Facebook</span></a></li>
-    						<li><a href="https://instagram.com/victrauguxto" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
-    						<li><a href="https://github.com/victrauguxto" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
+        <nav id="nav">
+            <ul class="links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/How_it_works">How it Works</a></li>
+                <li class="active"><a href="/login">Login</a></li>
+                <li><a href="/articles">Articles</a></li>
+            </ul>
+            <ul class="icons">
+                <li><a href="https://twitter.com/victrauguxto" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
+                <li><a href="https://www.linkedin.com/in/victoraugustomartins/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+                <li><a href="https://github.com/victrauguxto" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+                <li><a href="https://twitch.tv/victrauguxto" class="icon brands fa-twitch" target="_blank"><span class="label">Twitch</span></a></li>
+            </ul>
+        </nav>
 
         <!-- Main -->
         <div id="main">
@@ -66,7 +67,7 @@
 
         <!-- Copyright -->
         <div id="copyright">
-            <ul><li>&copy; Victor Augusto</li>
+            <ul><li>&copy; Victor Augusto</li></div>
         </div>
 
     </div>
@@ -80,14 +81,12 @@
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-        // Adicione um evento de clique para os elementos .btn-li
-        document.querySelectorAll('.btn-li').forEach(item => {
-            item.addEventListener('click', event => {
-                // Redirecione para o URL especificado no atributo data-url
-                window.location.href = item.getAttribute('data-url');
-            });
-        });
+        // Exibe a mensagem de erro se houver
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        alert('{{ messages[0] }}');
+        {% endif %}
+        {% endwith %}
     </script>
-
 </body>
 </html>

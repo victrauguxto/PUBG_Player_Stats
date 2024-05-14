@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>PUBG Analysis - Compare Players</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="static/css/main.css" />
+    <noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="fade-in">
+
+        <!-- Header -->
+        <header id="header">
+            <a href="/" class="logo">PUBG Analysis</a>
+            <h1>Compare Players</h1>
+        </header>
+
+        <!-- Main -->
+        <div id="main">
+
+            <!-- Formulário para filtrar jogadores -->
+            <!-- Compare Players Form -->
+            <section id="compare-players-form">
+                <h2>Compare Players</h2>
+                <form method="post" action="/compare_players">
+                    <div class="fields">
+                        <div class="field">
+                            <label for="sheet_link">Google Sheets Link</label>
+                            <input type="text" name="sheet_link" id="sheet_link" required />
+                        </div>
+                        <div class="field">
+                            <label for="pagina">Page Name</label>
+                            <input type="text" name="pagina" id="pagina" required />
+                        </div>
+                    </div>
+                    <ul class="actions special">
+                        <li><input type="submit" value="Compare" class="button" /></li>
+                    </ul>
+                </form>
+            </section>
+
+            <!-- Radar Chart -->
+            {% if fig %}
+                <section id="radar-chart">
+                    <h2>Radar Chart</h2>
+                    {{ fig | safe }}
+                </section>
+            {% endif %}
+
+        <!-- Footer -->
+        <footer id="footer">
+            <!-- Contact form and social links -->
+        </footer>
+
+        <!-- Copyright -->
+        <div id="copyright">
+            <ul><li>&copy; Victor Augusto</li>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
